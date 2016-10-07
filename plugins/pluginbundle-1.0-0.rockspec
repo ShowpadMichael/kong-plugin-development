@@ -22,7 +22,9 @@ build = {
     ["kong.plugins.primeauth.schema"] = "primeauth/schema.lua",
     ["kong.plugins.advokit-jwt.handler"] = "advokit-jwt/handler.lua",
     ["kong.plugins.advokit-jwt.schema"] = "advokit-jwt/schema.lua",
-    ["kong.plugins.advokit-jwt.jwt_parser"] = "advokit-jwt/jwt_parser.lua"
+    ["kong.plugins.advokit-jwt.jwt_parser"] = "advokit-jwt/jwt_parser.lua",
+    ["kong.plugins.showpad.handler"] = "showpad/handler.lua",
+    ["kong.plugins.showpad.schema"] = "showpad/schema.lua"
   }
 
 }

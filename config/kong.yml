@@ -5,6 +5,7 @@ custom_plugins:
   - helloworld
   - primeauth
   - advokit-jwt
+  - showpad
 nginx: |
   {{user}}
   worker_processes auto;
