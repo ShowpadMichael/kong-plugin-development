@@ -1,8 +1,22 @@
+-- Check incoming request
+-- Should contain either
+-- - PHPSessionID
+-- - OAuth Access-Token
+-- - JWT token
+
+
+
+
+
+
+
+
 -- Extending the Base Plugin handler is optional, as there is no real
 -- concept of interface in Lua, but the Base Plugin handler's methods
 -- can be called from your child implementation and will print logs
 -- in your `error.log` file (where all logs are printed).
 local BasePlugin = require "kong.plugins.base_plugin"
+local http = require "socket.http"
 local ShowpadHandler = BasePlugin:extend()
 
 -- Your plugin handler's constructor. If you are extending the
@@ -35,9 +49,12 @@ end
 function ShowpadHandler:access(config)
   ShowpadHandler.super.access(self)
 
-  -- Implement any custom logic here
-  ngx.header["X-My-Header"] = 'Hello World from Showpad! Kiekeboe!';
+  local  body, code, headers, status = http.request {
+    method = "GET",
+    url = "https://www.google.com"
+  }
 
+  ngx.header["X-My-Header"] = "status: " .. status;
 end
 
 -- Executed when all response headers bytes have been received from the upstream service.
