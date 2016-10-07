@@ -17,6 +17,8 @@
 -- in your `error.log` file (where all logs are printed).
 local BasePlugin = require "kong.plugins.base_plugin"
 local http = require "socket.http"
+local responses = require "kong.tools.responses"
+
 local ShowpadHandler = BasePlugin:extend()
 
 -- Your plugin handler's constructor. If you are extending the
@@ -51,10 +53,17 @@ function ShowpadHandler:access(config)
 
   local  body, code, headers, status = http.request {
     method = "GET",
-    url = "https://www.google.com"
+    url = "http://mockbin.org/bin/b133c679-d6b9-4d3a-87cb-1d22ac7e41fa"
   }
 
-  ngx.header["X-My-Header"] = "status: " .. status;
+  return responses.send_HTTP_UNAUTHORIZED()
+
+--  ngx.header["X-My-Header"] = "status: " .. status
+--  ngx.header["X-My-Code"] = "code: " .. code
+--  ngx.header["X-Bla"] = "foo = bar"
+--  ngx.header["X-Response"] = body
+--  ngx.header["X-Paul"] = headers["x-paul"]
+
 end
 
 -- Executed when all response headers bytes have been received from the upstream service.
